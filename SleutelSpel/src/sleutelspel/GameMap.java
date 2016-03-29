@@ -12,7 +12,6 @@ public class GameMap {
     private Finish finish;
     private GameManager gameManager;
     private Player player;
-    private int[][] tiles;
         
     public GameMap(){
         
