@@ -11,14 +11,9 @@ public class GameMap {
     private Key key;
     private Finish finish;
     private GameManager gameManager;
-<<<<<<< HEAD
     private Player player;
     private int[][] tiles;
-    
-=======
->>>>>>> origin/master
-    
-    
+        
     public GameMap(){
         
         this.wall = new Wall();
@@ -28,8 +23,7 @@ public class GameMap {
         this.finish = new Finish();
         this.gameManager = new GameManager();
         this.player = new Player();
-        
-        
+                
         gameManager.loadMap(gameManager.getCurrentMap());
     }
     
