@@ -14,7 +14,7 @@ public class Frame extends JFrame {
         
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
-        setTitle("Tryout");
+        setTitle("Super Pepe op zoek naar wiet.");
         setSize(WIDTH, HEIGHT);
         setLocationRelativeTo(null);
         setVisible(true);
