@@ -11,6 +11,7 @@ public class GameMap {
     private Key key;
     private Finish finish;
     private GameManager gameManager;
+    private Player player;
     private int[][] tiles;
     
     
@@ -23,18 +24,19 @@ public class GameMap {
         this.key = new Key();
         this.finish = new Finish();
         this.gameManager = new GameManager();
+        this.player = new Player();
         
         
         gameManager.loadMap(gameManager.getCurrentMap());
     }
     
-    public boolean checkUpMovement(int xPos, int yPos){
+    public boolean checkUpMovement(){
         
         boolean upMovement = true;
         
-        if (yPos / 50 != 0){
+        if (player.getyPos() / 50 != 0){
             
-            switch (gameManager.getTiles()[yPos / 50 - 1][xPos / 50]){
+            switch (gameManager.getTiles()[player.getyPos() / 50 - 1][player.getxPos() / 50]){
                 
                 case 1: upMovement = false;
                     break;
@@ -46,12 +48,12 @@ public class GameMap {
                 
                 else if (this.key.isIsPickedUp()){
                     upMovement = true;
-                    gameManager.getTiles()[yPos / 50 - 1][xPos / 50] = 0;  
+                    gameManager.getTiles()[player.getyPos() / 50 - 1][player.getxPos() / 50] = 0;  
                     break;
                 }
                    
                 case 3: this.key.setIsPickedUp(true);
-                    gameManager.getTiles()[yPos / 50 - 1][xPos / 50] = 0;
+                    gameManager.getTiles()[player.getyPos() / 50 - 1][player.getxPos() / 50] = 0;
                     break;      
                 case 4: if (gameManager.getCurrentMap() != 4){
                     gameManager.loadMap(gameManager.getCurrentMap());
@@ -63,13 +65,13 @@ public class GameMap {
         return upMovement;
     }
     
-    public boolean checkDownMovement(int xPos, int yPos){
+    public boolean checkDownMovement(){
         
         boolean downMovement = true;
         
-        if (yPos / 50 != 9){
+        if (player.getyPos() / 50 != 9){
             
-            switch (gameManager.getTiles()[yPos / 50 + 1][xPos / 50]){
+            switch (gameManager.getTiles()[player.getyPos() / 50 + 1][player.getxPos() / 50]){
                 
                 case 1: downMovement = false;
                     break;
@@ -81,12 +83,12 @@ public class GameMap {
                 
                 else if (this.key.isIsPickedUp()){
                     downMovement = true;
-                    gameManager.getTiles()[yPos / 50 + 1][xPos / 50] = 0;   
+                    gameManager.getTiles()[player.getyPos() / 50 + 1][player.getxPos() / 50] = 0;   
                     break;
                 }
                 
                 case 3: this.key.setIsPickedUp(true);
-                    gameManager.getTiles()[yPos / 50 + 1][xPos / 50] = 0;
+                    gameManager.getTiles()[player.getyPos() / 50 + 1][player.getxPos() / 50] = 0;
                     break;
                     
                 case 4: if (gameManager.getCurrentMap() != 4){
@@ -98,13 +100,13 @@ public class GameMap {
         return downMovement;
     }
     
-    public boolean checkRightMovement(int xPos, int yPos){
+    public boolean checkRightMovement(){
        
         boolean rightMovement = true;
         
-        if (xPos / 50 != 9){
+        if (player.getxPos() / 50 != 9){
             
-            switch (gameManager.getTiles()[yPos / 50][xPos / 50 + 1]){
+            switch (gameManager.getTiles()[player.getyPos() / 50][player.getxPos() / 50 + 1]){
                 
                 case 1: rightMovement = false;
                     break;
@@ -116,12 +118,12 @@ public class GameMap {
                 
                 else {
                     rightMovement = true;
-                    gameManager.getTiles()[yPos / 50][xPos / 50 + 1] = 0;   
+                    gameManager.getTiles()[player.getyPos() / 50][player.getxPos() / 50 + 1] = 0;   
                     break;
                 }
                 
                 case 3: this.key.setIsPickedUp(true);
-                    gameManager.getTiles()[yPos / 50][xPos / 50 + 1] = 0;
+                    gameManager.getTiles()[player.getyPos() / 50][player.getxPos() / 50 + 1] = 0;
                     break;
                     
                 case 4: if (gameManager.getCurrentMap() != 4){
@@ -133,13 +135,13 @@ public class GameMap {
         return rightMovement;
     }
     
-    public boolean checkLeftMovement(int xPos, int yPos){
+    public boolean checkLeftMovement(){
         
         boolean leftMovement = true;
         
-        if (xPos / 50 != 0){
+        if (player.getxPos() / 50 != 0){
             
-            switch (gameManager.getTiles()[yPos / 50][xPos / 50 - 1]){
+            switch (gameManager.getTiles()[player.getyPos() / 50][player.getxPos() / 50 - 1]){
                 
                 case 1: leftMovement = false;
                     break;
@@ -151,12 +153,12 @@ public class GameMap {
                 
                 else {
                     leftMovement = true;
-                    gameManager.getTiles()[yPos / 50][xPos / 50 - 1] = 0; 
+                    gameManager.getTiles()[player.getyPos() / 50][player.getxPos() / 50 - 1] = 0; 
                     break;
                 }
                 
                 case 3: this.key.setIsPickedUp(true);
-                    gameManager.getTiles()[yPos / 50][xPos / 50 - 1] = 0;
+                    gameManager.getTiles()[player.getyPos() / 50][player.getxPos() / 50 - 1] = 0;
                     break;
                     
                 case 4: if (gameManager.getCurrentMap() != 4){
@@ -193,10 +195,19 @@ public class GameMap {
                     
                     case 4: this.finish.paintTile(g, i, j);
                 }
-
+                
                 g.setColor(Color.BLACK);
                 g.drawRect(i, j, 50, 50);
+
             }                        
-        }                
-    }            
+        }
+        
+        player.paintTile(g);
+    }    
+
+    public Player getPlayer() {
+        return player;
+    }
+    
+    
 }

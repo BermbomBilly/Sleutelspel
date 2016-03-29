@@ -19,7 +19,7 @@ public class TextReader {
         this.tiles = new int[10][10];        
     }
  
-    public int[][] loadMap(String map){
+    public int[][] readFile(String map){
         
         this.url = getClass().getResource(map);
         this.file = new File(url.getPath());

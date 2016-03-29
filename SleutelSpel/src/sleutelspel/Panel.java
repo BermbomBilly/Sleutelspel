@@ -8,15 +8,12 @@ import java.awt.event.KeyListener;
 public class Panel extends JPanel {
 
     private GameMap map;
-    private Player player;
     private KeyPressed keypressed;
 
     public Panel(){
         
         this.map = new GameMap();
-        this.player = new Player();
-        this.keypressed = new KeyPressed();
-                
+        this.keypressed = new KeyPressed();                
         setFocusable(true);
         addKeyListener(this.keypressed);
         requestFocusInWindow();   
@@ -29,7 +26,7 @@ public class Panel extends JPanel {
         super.paintComponent(g);
                  
         this.map.drawMap(g);
-        player.paintTile(g);
+
         
     }
 
@@ -45,27 +42,27 @@ public class Panel extends JPanel {
 
             int key = ke.getKeyCode();
             
-            if (key == KeyEvent.VK_LEFT && map.checkLeftMovement(player.getxPos(), player.getyPos())) {
+            if (key == KeyEvent.VK_LEFT && map.checkLeftMovement()) {
                 
-                player.moveLeft();
+                map.getPlayer().moveLeft();
                 repaint();                
             }
             
-            if (key == KeyEvent.VK_RIGHT && map.checkRightMovement(player.getxPos(), player.getyPos())) {
+            if (key == KeyEvent.VK_RIGHT && map.checkRightMovement()) {
                 
-                player.moveRight();
+                map.getPlayer().moveRight();
                 repaint();
             }
             
-            if (key == KeyEvent.VK_UP && map.checkUpMovement(player.getxPos(), player.getyPos())) {
+            if (key == KeyEvent.VK_UP && map.checkUpMovement()) {
                 
-                player.moveUp();
+                map.getPlayer().moveUp();
                 repaint();      
             }
             
-            if (key == KeyEvent.VK_DOWN && map.checkDownMovement(player.getxPos(), player.getyPos())) {
+            if (key == KeyEvent.VK_DOWN && map.checkDownMovement()) {
                 
-                player.moveDown();
+                map.getPlayer().moveDown();
                 repaint();               
             }
             
