@@ -11,9 +11,12 @@ public class GameMap {
     private Key key;
     private Finish finish;
     private GameManager gameManager;
+<<<<<<< HEAD
     private Player player;
     private int[][] tiles;
     
+=======
+>>>>>>> origin/master
     
     
     public GameMap(){

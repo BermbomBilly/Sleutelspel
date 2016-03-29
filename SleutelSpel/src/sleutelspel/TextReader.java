@@ -22,11 +22,11 @@ public class TextReader {
     public int[][] readFile(String map){
         
         this.url = getClass().getResource(map);
-        this.file = new File(url.getPath());
+        this.file = new File(this.url.getPath());
         
         try {
             
-            this.scanner = new Scanner(file);
+            this.scanner = new Scanner(this.file);
         } 
         
         catch (FileNotFoundException ex) {
@@ -34,13 +34,14 @@ public class TextReader {
             Logger.getLogger(TextReader.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        for (int i = 0; i < tiles.length; i++) {
-            for (int j = 0; j < tiles.length; j++) {
+        for (int i = 0; i < this.tiles.length; i++) {
+            for (int j = 0; j < this.tiles.length; j++) {
                 
-                this.tiles[i][j] = scanner.nextInt();               
+                this.tiles[i][j] = this.scanner.nextInt();               
             }            
         }
         
-        return tiles;
+        return this.tiles;
     }
+
 }
