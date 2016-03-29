@@ -3,37 +3,29 @@ package sleutelspel;
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class GameMap2 {
+public class GameMap {
         
-    private int[][] tiles;
     private Wall wall;
     private Barricade barricade;
     private Tile tile;
     private Key key;
     private Finish finish;
-    private TextReader textReader;
+    private GameManager gameManager;
+    private int[][] tiles;
     
-    private String map1;
-    private String map2;
-    private String map3;
-    private String map4;
     
-    public GameMap2(){
+    
+    public GameMap(){
         
         this.wall = new Wall();
         this.barricade = new Barricade();
         this.tile = new Tile();
         this.key = new Key();
         this.finish = new Finish();
+        this.gameManager = new GameManager();
         
-        this.map1 = "Map1.txt";
-        this.map2 = "Map2.txt";
-        this.map3 = "Map3.txt";
-        this.map4 = "Map4.txt";
-
-        this.textReader = new TextReader();
         
-        tiles = textReader.loadMap(this.map1);                        
+        gameManager.loadMap(gameManager.getCurrentMap());
     }
     
     public boolean checkUpMovement(int xPos, int yPos){
@@ -42,7 +34,7 @@ public class GameMap2 {
         
         if (yPos / 50 != 0){
             
-            switch (this.tiles[yPos / 50 - 1][xPos / 50]){
+            switch (gameManager.getTiles()[yPos / 50 - 1][xPos / 50]){
                 
                 case 1: upMovement = false;
                     break;
@@ -54,13 +46,17 @@ public class GameMap2 {
                 
                 else if (this.key.isIsPickedUp()){
                     upMovement = true;
-                    this.tiles[yPos / 50 - 1][xPos / 50] = 0;  
+                    gameManager.getTiles()[yPos / 50 - 1][xPos / 50] = 0;  
                     break;
                 }
                    
                 case 3: this.key.setIsPickedUp(true);
-                    this.tiles[yPos / 50 - 1][xPos / 50] = 0;
-                    break;                
+                    gameManager.getTiles()[yPos / 50 - 1][xPos / 50] = 0;
+                    break;      
+                case 4: if (gameManager.getCurrentMap() != 4){
+                    gameManager.loadMap(gameManager.getCurrentMap());
+                    
+                }
             }
         } 
         
@@ -73,7 +69,7 @@ public class GameMap2 {
         
         if (yPos / 50 != 9){
             
-            switch (this.tiles[yPos / 50 + 1][xPos / 50]){
+            switch (gameManager.getTiles()[yPos / 50 + 1][xPos / 50]){
                 
                 case 1: downMovement = false;
                     break;
@@ -85,13 +81,17 @@ public class GameMap2 {
                 
                 else if (this.key.isIsPickedUp()){
                     downMovement = true;
-                    this.tiles[yPos / 50 + 1][xPos / 50] = 0;   
+                    gameManager.getTiles()[yPos / 50 + 1][xPos / 50] = 0;   
                     break;
                 }
                 
                 case 3: this.key.setIsPickedUp(true);
-                    this.tiles[yPos / 50 + 1][xPos / 50] = 0;
+                    gameManager.getTiles()[yPos / 50 + 1][xPos / 50] = 0;
                     break;
+                    
+                case 4: if (gameManager.getCurrentMap() != 4){
+                    gameManager.loadMap(gameManager.getCurrentMap());
+                }
             }
         } 
         
@@ -104,7 +104,7 @@ public class GameMap2 {
         
         if (xPos / 50 != 9){
             
-            switch (this.tiles[yPos / 50][xPos / 50 + 1]){
+            switch (gameManager.getTiles()[yPos / 50][xPos / 50 + 1]){
                 
                 case 1: rightMovement = false;
                     break;
@@ -116,13 +116,17 @@ public class GameMap2 {
                 
                 else {
                     rightMovement = true;
-                    this.tiles[yPos / 50][xPos / 50 + 1] = 0;   
+                    gameManager.getTiles()[yPos / 50][xPos / 50 + 1] = 0;   
                     break;
                 }
                 
                 case 3: this.key.setIsPickedUp(true);
-                    this.tiles[yPos / 50][xPos / 50 + 1] = 0;
+                    gameManager.getTiles()[yPos / 50][xPos / 50 + 1] = 0;
                     break;
+                    
+                case 4: if (gameManager.getCurrentMap() != 4){
+                    gameManager.loadMap(gameManager.getCurrentMap());
+                }
             }
         }
         
@@ -135,7 +139,7 @@ public class GameMap2 {
         
         if (xPos / 50 != 0){
             
-            switch (this.tiles[yPos / 50][xPos / 50 - 1]){
+            switch (gameManager.getTiles()[yPos / 50][xPos / 50 - 1]){
                 
                 case 1: leftMovement = false;
                     break;
@@ -147,13 +151,17 @@ public class GameMap2 {
                 
                 else {
                     leftMovement = true;
-                    this.tiles[yPos / 50][xPos / 50 - 1] = 0; 
+                    gameManager.getTiles()[yPos / 50][xPos / 50 - 1] = 0; 
                     break;
                 }
                 
                 case 3: this.key.setIsPickedUp(true);
-                    this.tiles[yPos / 50][xPos / 50 - 1] = 0;
+                    gameManager.getTiles()[yPos / 50][xPos / 50 - 1] = 0;
                     break;
+                    
+                case 4: if (gameManager.getCurrentMap() != 4){
+                    gameManager.loadMap(gameManager.getCurrentMap());
+                }
             }
         }
         
@@ -169,7 +177,7 @@ public class GameMap2 {
             for (int j = 0; j < 500; j += 50) {
                 
                 
-                switch (this.tiles[j / 50][i / 50]){
+                switch (gameManager.getTiles()[j / 50][i / 50]){
                     
                     default: this.tile.paintTile(g, i, j);
                         break;

@@ -7,19 +7,20 @@ import java.awt.event.KeyListener;
 
 public class Panel extends JPanel {
 
-    private GameMap2 map;
+    private GameMap map;
     private Player player;
     private KeyPressed keypressed;
 
     public Panel(){
         
-        this.map = new GameMap2();
+        this.map = new GameMap();
         this.player = new Player();
         this.keypressed = new KeyPressed();
                 
         setFocusable(true);
         addKeyListener(this.keypressed);
-        requestFocusInWindow();                
+        requestFocusInWindow();   
+        
     }
 
     @Override
