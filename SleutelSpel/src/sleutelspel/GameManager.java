@@ -17,7 +17,7 @@ public class GameManager {
         this.map2 = "Map2.txt";
         this.map3 = "Map3.txt";
         this.map4 = "Map4.txt";
-
+       
         this.textReader = new TextReader();
         
     }
@@ -26,20 +26,27 @@ public class GameManager {
     
     public void loadMap(int currentMap){
         switch (currentMap){
-            case 1: this.tiles = this.textReader.readFile(this.map1);
+            case 1: 
+                this.tiles = this.textReader.readFile(this.map1);
                 this.currentMap++;
                 break;
-            case 2: this.tiles = this.textReader.readFile(this.map2);
+            case 2: 
+                this.tiles = this.textReader.readFile(this.map2);
                 this.currentMap++;
                 break;
-            case 3: this.tiles = this.textReader.readFile(this.map3);
+            case 3: 
+                this.tiles = this.textReader.readFile(this.map3);
                 this.currentMap++;
                 break;
-            case 4: this.tiles = this.textReader.readFile(this.map4);
+            case 4: 
+                this.tiles = this.textReader.readFile(this.map4);
+                this.currentMap++;
                 break;
         }
     }
+    
 
+    
     public int getCurrentMap() {
         return currentMap;
     }

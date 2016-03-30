@@ -2,6 +2,7 @@ package sleutelspel;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import javax.swing.JOptionPane;
 
 public class GameMap {
         
@@ -22,39 +23,48 @@ public class GameMap {
         this.finish = new Finish();
         this.gameManager = new GameManager();
         this.player = new Player();
-                
-        gameManager.loadMap(gameManager.getCurrentMap());
+        this.gameManager.loadMap(this.gameManager.getCurrentMap());
     }
     
     public boolean checkUpMovement(){
         
         boolean upMovement = true;
         
-        if (player.getyPos() / 50 != 0){
+        if (this.player.getyPos() / 50 != 0){
             
-            switch (gameManager.getTiles()[player.getyPos() / 50 - 1][player.getxPos() / 50]){
+            switch (this.gameManager.getTiles()[this.player.getyPos() / 50 - 1][this.player.getxPos() / 50]){
                 
-                case 1: upMovement = false;
-                    break;
-                
-                case 2: if (!this.key.isIsPickedUp()){
+                case 1: 
                     upMovement = false;
                     break;
-                }
                 
-                else if (this.key.isIsPickedUp()){
-                    upMovement = true;
-                    gameManager.getTiles()[player.getyPos() / 50 - 1][player.getxPos() / 50] = 0;  
-                    break;
-                }
+                case 2: 
+                    if (!this.key.isIsPickedUp()){
+                        upMovement = false;
+                        JOptionPane.showMessageDialog(null, "You cannot go here.", "Barricade", JOptionPane.PLAIN_MESSAGE);
+                        break;
+                    }
+                
+                    else if (this.key.isIsPickedUp()){
+                        upMovement = true;
+                        this.gameManager.getTiles()[this.player.getyPos() / 50 - 1][this.player.getxPos() / 50] = 0;  
+                        break;
+                    }
                    
-                case 3: this.key.setIsPickedUp(true);
-                    gameManager.getTiles()[player.getyPos() / 50 - 1][player.getxPos() / 50] = 0;
+                case 3: 
+                    this.key.setIsPickedUp(true);
+                    this.gameManager.getTiles()[this.player.getyPos() / 50 - 1][this.player.getxPos() / 50] = 0;
                     break;      
-                case 4: if (gameManager.getCurrentMap() != 4){
-                    gameManager.loadMap(gameManager.getCurrentMap());
+                case 4: 
+                    if (gameManager.getCurrentMap() != 5){
+                        this.gameManager.loadMap(this.gameManager.getCurrentMap());
+                        this.player.resetPlayerPosition(0, 0);
+                        this.key.setIsPickedUp(false);                           
+                    }
                     
-                }
+                    else {
+                        JOptionPane.showMessageDialog(null, "You win!", "Congratulations", JOptionPane.PLAIN_MESSAGE);
+                    }
             }
         } 
         
@@ -67,29 +77,40 @@ public class GameMap {
         
         if (player.getyPos() / 50 != 9){
             
-            switch (gameManager.getTiles()[player.getyPos() / 50 + 1][player.getxPos() / 50]){
+            switch (this.gameManager.getTiles()[this.player.getyPos() / 50 + 1][this.player.getxPos() / 50]){
                 
-                case 1: downMovement = false;
-                    break;
-                
-                case 2: if (!this.key.isIsPickedUp()){
+                case 1: 
                     downMovement = false;
                     break;
-                }
                 
-                else if (this.key.isIsPickedUp()){
-                    downMovement = true;
-                    gameManager.getTiles()[player.getyPos() / 50 + 1][player.getxPos() / 50] = 0;   
-                    break;
-                }
+                case 2: 
+                    if (!this.key.isIsPickedUp()){
+                        downMovement = false;
+                        JOptionPane.showMessageDialog(null, "You cannot go here.", "Barricade", JOptionPane.PLAIN_MESSAGE);
+                        break;
+                    }
                 
-                case 3: this.key.setIsPickedUp(true);
-                    gameManager.getTiles()[player.getyPos() / 50 + 1][player.getxPos() / 50] = 0;
+                    else if (this.key.isIsPickedUp()){
+                        downMovement = true;
+                        this.gameManager.getTiles()[this.player.getyPos() / 50 + 1][this.player.getxPos() / 50] = 0;   
+                        break;
+                    }
+                
+                case 3: 
+                    this.key.setIsPickedUp(true);
+                    this.gameManager.getTiles()[this.player.getyPos() / 50 + 1][this.player.getxPos() / 50] = 0;
                     break;
                     
-                case 4: if (gameManager.getCurrentMap() != 4){
-                    gameManager.loadMap(gameManager.getCurrentMap());
-                }
+                case 4: 
+                    if (this.gameManager.getCurrentMap() != 5){
+                        this.gameManager.loadMap(this.gameManager.getCurrentMap());
+                        this.player.resetPlayerPosition(0, -50);
+                        this.key.setIsPickedUp(false);
+                    }
+                    
+                    else {
+                        JOptionPane.showMessageDialog(null, "You win!", "Congratulations", JOptionPane.PLAIN_MESSAGE);
+                    }
             }
         } 
         
@@ -100,31 +121,42 @@ public class GameMap {
        
         boolean rightMovement = true;
         
-        if (player.getxPos() / 50 != 9){
+        if (this.player.getxPos() / 50 != 9){
             
-            switch (gameManager.getTiles()[player.getyPos() / 50][player.getxPos() / 50 + 1]){
+            switch (this.gameManager.getTiles()[this.player.getyPos() / 50][this.player.getxPos() / 50 + 1]){
                 
-                case 1: rightMovement = false;
-                    break;
-                
-                case 2: if (this.key.isIsPickedUp() == false){
+                case 1: 
                     rightMovement = false;
                     break;
-                }
                 
-                else {
-                    rightMovement = true;
-                    gameManager.getTiles()[player.getyPos() / 50][player.getxPos() / 50 + 1] = 0;   
-                    break;
-                }
+                case 2: 
+                    if (this.key.isIsPickedUp() == false){
+                        rightMovement = false;
+                        JOptionPane.showMessageDialog(null, "You cannot go here.", "Barricade", JOptionPane.PLAIN_MESSAGE);
+                        break;
+                    }
                 
-                case 3: this.key.setIsPickedUp(true);
-                    gameManager.getTiles()[player.getyPos() / 50][player.getxPos() / 50 + 1] = 0;
+                    else {
+                        rightMovement = true;
+                        this.gameManager.getTiles()[this.player.getyPos() / 50][this.player.getxPos() / 50 + 1] = 0;   
+                        break;
+                    }
+                
+                case 3: 
+                    this.key.setIsPickedUp(true);
+                    this.gameManager.getTiles()[this.player.getyPos() / 50][this.player.getxPos() / 50 + 1] = 0;
                     break;
                     
-                case 4: if (gameManager.getCurrentMap() != 4){
-                    gameManager.loadMap(gameManager.getCurrentMap());
-                }
+                case 4: 
+                    if (this.gameManager.getCurrentMap() != 5){
+                        this.gameManager.loadMap(this.gameManager.getCurrentMap());
+                        this.player.resetPlayerPosition(-50, 0);
+                        this.key.setIsPickedUp(false);
+                    }
+                
+                    else {
+                        JOptionPane.showMessageDialog(null, "You win!", "Congratulations", JOptionPane.PLAIN_MESSAGE);
+                    }
             }
         }
         
@@ -135,31 +167,42 @@ public class GameMap {
         
         boolean leftMovement = true;
         
-        if (player.getxPos() / 50 != 0){
+        if (this.player.getxPos() / 50 != 0){
             
-            switch (gameManager.getTiles()[player.getyPos() / 50][player.getxPos() / 50 - 1]){
+            switch (this.gameManager.getTiles()[this.player.getyPos() / 50][this.player.getxPos() / 50 - 1]){
                 
-                case 1: leftMovement = false;
-                    break;
-                
-                case 2: if (this.key.isIsPickedUp() == false){
+                case 1: 
                     leftMovement = false;
                     break;
-                }
                 
-                else {
-                    leftMovement = true;
-                    gameManager.getTiles()[player.getyPos() / 50][player.getxPos() / 50 - 1] = 0; 
-                    break;
-                }
+                case 2: 
+                    if (this.key.isIsPickedUp() == false){
+                        leftMovement = false;
+                        JOptionPane.showMessageDialog(null, "You cannot go here.", "Barricade", JOptionPane.PLAIN_MESSAGE);
+                        break;
+                    }
                 
-                case 3: this.key.setIsPickedUp(true);
-                    gameManager.getTiles()[player.getyPos() / 50][player.getxPos() / 50 - 1] = 0;
+                    else {
+                        leftMovement = true;
+                        this.gameManager.getTiles()[this.player.getyPos() / 50][this.player.getxPos() / 50 - 1] = 0; 
+                        break;
+                    }
+                
+                case 3: 
+                    this.key.setIsPickedUp(true);
+                    this.gameManager.getTiles()[this.player.getyPos() / 50][this.player.getxPos() / 50 - 1] = 0;
                     break;
                     
-                case 4: if (gameManager.getCurrentMap() != 4){
-                    gameManager.loadMap(gameManager.getCurrentMap());
-                }
+                case 4: 
+                    if (this.gameManager.getCurrentMap() != 5){
+                        this.gameManager.loadMap(this.gameManager.getCurrentMap());
+                        this.player.resetPlayerPosition(0, 0);
+                        this.key.setIsPickedUp(false);
+                    }
+                
+                    else {
+                        JOptionPane.showMessageDialog(null, "You win!", "Congratulations", JOptionPane.PLAIN_MESSAGE);
+                    }
             }
         }
         
@@ -175,7 +218,7 @@ public class GameMap {
             for (int j = 0; j < 500; j += 50) {
                 
                 
-                switch (gameManager.getTiles()[j / 50][i / 50]){
+                switch (this.gameManager.getTiles()[j / 50][i / 50]){
                     
                     default: this.tile.paintTile(g, i, j);
                         break;
@@ -198,11 +241,11 @@ public class GameMap {
             }                        
         }
         
-        player.paintTile(g);
+        this.player.paintTile(g);
     }    
 
     public Player getPlayer() {
-        return player;
+        return this.player;
     }
     
     

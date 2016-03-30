@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
-public class Player  {
+public class Player {
 
     private BufferedImage pepe;
     private int xPos, yPos, width, height;
@@ -61,6 +61,11 @@ public class Player  {
             this.xPos += 50;
         }
     }
+    
+    public void resetPlayerPosition(int x, int y){
+        this.setxPos(x);
+        this.setyPos(y);
+    }    
 
 
     public void paintTile(Graphics g) {
