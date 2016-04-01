@@ -41,29 +41,13 @@ public class GameMap {
                 case 2: 
                     if (!this.key.isIsPickedUp()){
                         upMovement = false;
-                        JOptionPane.showMessageDialog(null, "You cannot go here.", "Barricade", JOptionPane.PLAIN_MESSAGE);
+                        this.gameManager.showMessage("You cannot go here.", "Barricade");
                         break;
                     }
                 
                     else if (this.key.isIsPickedUp()){
                         upMovement = true;
-                        this.gameManager.getTiles()[this.player.getyPos() / 50 - 1][this.player.getxPos() / 50] = 0;  
                         break;
-                    }
-                   
-                case 3: 
-                    this.key.setIsPickedUp(true);
-                    this.gameManager.getTiles()[this.player.getyPos() / 50 - 1][this.player.getxPos() / 50] = 0;
-                    break;      
-                case 4: 
-                    if (gameManager.getCurrentMap() != 5){
-                        this.gameManager.loadMap(this.gameManager.getCurrentMap());
-                        this.player.resetPlayerPosition(0, 0);
-                        this.key.setIsPickedUp(false);                           
-                    }
-                    
-                    else {
-                        JOptionPane.showMessageDialog(null, "You win!", "Congratulations", JOptionPane.PLAIN_MESSAGE);
                     }
             }
         } 
@@ -86,30 +70,13 @@ public class GameMap {
                 case 2: 
                     if (!this.key.isIsPickedUp()){
                         downMovement = false;
-                        JOptionPane.showMessageDialog(null, "You cannot go here.", "Barricade", JOptionPane.PLAIN_MESSAGE);
+                        this.gameManager.showMessage("You cannot go here.", "Barricade");
                         break;
                     }
                 
                     else if (this.key.isIsPickedUp()){
-                        downMovement = true;
-                        this.gameManager.getTiles()[this.player.getyPos() / 50 + 1][this.player.getxPos() / 50] = 0;   
+                        downMovement = true;   
                         break;
-                    }
-                
-                case 3: 
-                    this.key.setIsPickedUp(true);
-                    this.gameManager.getTiles()[this.player.getyPos() / 50 + 1][this.player.getxPos() / 50] = 0;
-                    break;
-                    
-                case 4: 
-                    if (this.gameManager.getCurrentMap() != 5){
-                        this.gameManager.loadMap(this.gameManager.getCurrentMap());
-                        this.player.resetPlayerPosition(0, -50);
-                        this.key.setIsPickedUp(false);
-                    }
-                    
-                    else {
-                        JOptionPane.showMessageDialog(null, "You win!", "Congratulations", JOptionPane.PLAIN_MESSAGE);
                     }
             }
         } 
@@ -132,30 +99,13 @@ public class GameMap {
                 case 2: 
                     if (this.key.isIsPickedUp() == false){
                         rightMovement = false;
-                        JOptionPane.showMessageDialog(null, "You cannot go here.", "Barricade", JOptionPane.PLAIN_MESSAGE);
+                        this.gameManager.showMessage("You cannot go here.", "Barricade");
                         break;
                     }
                 
                     else {
-                        rightMovement = true;
-                        this.gameManager.getTiles()[this.player.getyPos() / 50][this.player.getxPos() / 50 + 1] = 0;   
+                        rightMovement = true;   
                         break;
-                    }
-                
-                case 3: 
-                    this.key.setIsPickedUp(true);
-                    this.gameManager.getTiles()[this.player.getyPos() / 50][this.player.getxPos() / 50 + 1] = 0;
-                    break;
-                    
-                case 4: 
-                    if (this.gameManager.getCurrentMap() != 5){
-                        this.gameManager.loadMap(this.gameManager.getCurrentMap());
-                        this.player.resetPlayerPosition(-50, 0);
-                        this.key.setIsPickedUp(false);
-                    }
-                
-                    else {
-                        JOptionPane.showMessageDialog(null, "You win!", "Congratulations", JOptionPane.PLAIN_MESSAGE);
                     }
             }
         }
@@ -178,30 +128,13 @@ public class GameMap {
                 case 2: 
                     if (this.key.isIsPickedUp() == false){
                         leftMovement = false;
-                        JOptionPane.showMessageDialog(null, "You cannot go here.", "Barricade", JOptionPane.PLAIN_MESSAGE);
+                        this.gameManager.showMessage("You cannot go here.", "Barricade");
                         break;
                     }
                 
                     else {
-                        leftMovement = true;
-                        this.gameManager.getTiles()[this.player.getyPos() / 50][this.player.getxPos() / 50 - 1] = 0; 
+                        leftMovement = true; 
                         break;
-                    }
-                
-                case 3: 
-                    this.key.setIsPickedUp(true);
-                    this.gameManager.getTiles()[this.player.getyPos() / 50][this.player.getxPos() / 50 - 1] = 0;
-                    break;
-                    
-                case 4: 
-                    if (this.gameManager.getCurrentMap() != 5){
-                        this.gameManager.loadMap(this.gameManager.getCurrentMap());
-                        this.player.resetPlayerPosition(0, 0);
-                        this.key.setIsPickedUp(false);
-                    }
-                
-                    else {
-                        JOptionPane.showMessageDialog(null, "You win!", "Congratulations", JOptionPane.PLAIN_MESSAGE);
                     }
             }
         }
@@ -209,7 +142,32 @@ public class GameMap {
         return leftMovement;
     }
     
-
+    public void checkAction(){
+        
+        
+        switch(this.gameManager.getTiles()[this.player.getyPos() / 50][this.player.getxPos() / 50]){
+            
+            case 2:
+                this.gameManager.getTiles()[this.player.getyPos() / 50][this.player.getxPos() / 50] = 0;
+                break;
+                
+            case 3:
+                this.gameManager.getTiles()[this.player.getyPos() / 50][this.player.getxPos() / 50] = 0;
+                this.key.setIsPickedUp(true);
+                break;
+                
+            case 4:
+                if (gameManager.getCurrentMap() != 5){
+                        this.gameManager.loadMap(this.gameManager.getCurrentMap());
+                        this.player.resetPlayerPosition(0, 0);
+                        this.key.setIsPickedUp(false);                           
+                    }
+                    
+                    else {
+                        this.gameManager.showMessage("You win!", "Congratulations");
+                    }
+        }
+    }
     
     public void drawMap(Graphics g){
         

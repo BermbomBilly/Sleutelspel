@@ -1,5 +1,7 @@
 package sleutelspel;
 
+import javax.swing.JOptionPane;
+
 public class GameManager {
     
     private String map1;
@@ -43,6 +45,12 @@ public class GameManager {
                 this.currentMap++;
                 break;
         }
+    }
+    
+    public void showMessage(String message, String title){
+        
+        JOptionPane.showMessageDialog(null, message, title,JOptionPane.PLAIN_MESSAGE);
+        
     }
     
 

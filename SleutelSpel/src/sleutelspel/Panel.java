@@ -45,25 +45,29 @@ public class Panel extends JPanel {
             if (key == KeyEvent.VK_LEFT && map.checkLeftMovement()) {
                 
                 map.getPlayer().moveLeft();
-                repaint();                
+                repaint(); 
+                map.checkAction();               
             }
             
             if (key == KeyEvent.VK_RIGHT && map.checkRightMovement()) {
                 
                 map.getPlayer().moveRight();
-                repaint();
+                repaint(); 
+                map.checkAction();
             }
             
             if (key == KeyEvent.VK_UP && map.checkUpMovement()) {
                 
                 map.getPlayer().moveUp();
-                repaint();      
+                repaint();                 
+                map.checkAction();      
             }
             
             if (key == KeyEvent.VK_DOWN && map.checkDownMovement()) {
                 
                 map.getPlayer().moveDown();
-                repaint();               
+                repaint();                 
+                map.checkAction();            
             }
             
             if (key == KeyEvent.VK_ESCAPE){
