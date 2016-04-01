@@ -1,13 +1,10 @@
 package sleutelspel;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import javax.imageio.ImageIO;
 
 public class Player {
 
-    private BufferedImage pepe;
+    private ImageReader imageReader;
     private int xPos, yPos, width, height;
     private final int MAX_Y = 450;
     private final int MAX_X = 450;
@@ -22,16 +19,8 @@ public class Player {
         this.width = 50;
         this.height = 50;
         
-        try {
-            
-            this.pepe = ImageIO.read(getClass().getResourceAsStream("pepe.png"));
-        } 
-        
-        catch (IOException ex) {
-            
-            ex.printStackTrace();
-        }
-        
+        this.imageReader = new ImageReader();
+        this.imageReader.loadImage("pepe.png");        
     }
 
     public void moveUp(){
@@ -70,7 +59,7 @@ public class Player {
 
     public void paintTile(Graphics g) {
         
-        g.drawImage(this.pepe, this.xPos, this.yPos, this.width, this.height, null);
+        g.drawImage(this.imageReader.getImage(), this.xPos, this.yPos, this.width, this.height, null);
     }
 
     public int getxPos() {

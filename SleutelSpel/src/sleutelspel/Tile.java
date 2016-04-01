@@ -6,12 +6,14 @@ public class Tile {
     
     private int width, height;
     private Color color;
+    private ImageReader imageReader;
 
     public Tile(){
         
         this.color = Color.WHITE;
         this.width = 50;
         this.height = 50;
+        this.imageReader = new ImageReader();
     }
 
     public int getWidth() {
@@ -23,7 +25,10 @@ public class Tile {
         
         return height;
     }
-    
+
+    public ImageReader getImageReader() {
+        return imageReader;
+    }
     
     public void paintTile(Graphics g, int x, int y){
         
