@@ -192,10 +192,6 @@ public class GameMap {
                     
                     case 4: this.finish.paintTile(g, i, j);
                 }
-                
-                g.setColor(Color.BLACK);
-                g.drawRect(i, j, 50, 50);
-
             }                        
         }
         
