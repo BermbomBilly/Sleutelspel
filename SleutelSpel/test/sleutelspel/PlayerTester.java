@@ -21,6 +21,10 @@ public class PlayerTester {
         this.yPos = 0;
         this.width = 50;
         this.height = 50;
+        int MAX_Y = 450;
+        int MAX_X = 450;
+        int MIN_Y = 0;
+        int MIN_X = 0;   
     }
     
     @Test
@@ -95,6 +99,52 @@ public class PlayerTester {
         int expectedxPos = 300 + 50;
         
         assertEquals("xPos check after right movement", expectedxPos, xPos);
+    }
+    
+    @Test
+    public void upMovementBoundTest(){
+        
+        this.player.moveUp();
+        
+        int yPos = this.player.getyPos();
+        int expectedyPos = 0;
+        
+        assertEquals(expectedyPos, yPos);
+    }
+    
+    @Test
+    public void downMovementBoundTest(){
+        
+        this.player.setyPos(450);
+        this.player.moveDown();
+        
+        int yPos = this.player.getyPos();
+        int expectedyPos = 450;
+        
+        assertEquals(expectedyPos, yPos);
+    }
+    
+    @Test
+    public void leftMovementBoundTest(){
+        
+        this.player.moveLeft();
+        
+        int xPos = this.player.getxPos();
+        int expectedxPos = 0;
+        
+        assertEquals(expectedxPos, xPos);
+    }
+    
+    @Test
+    public void rightMovementBoundTest(){
+        
+        this.player.setxPos(450);
+        this.player.moveRight();
+        
+        int xPos = this.player.getxPos();
+        int expectedxPos = 450;
+        
+        assertEquals(expectedxPos, xPos);
     }
     
     @Test

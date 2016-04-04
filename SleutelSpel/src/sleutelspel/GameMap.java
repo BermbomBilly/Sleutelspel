@@ -202,5 +202,7 @@ public class GameMap {
         return this.player;
     }
     
-    
+    public Key getKey(){
+        return this.key;
+    }
 }
