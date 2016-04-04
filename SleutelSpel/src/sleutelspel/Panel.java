@@ -16,7 +16,8 @@ public class Panel extends JPanel {
         this.keypressed = new KeyPressed();                
         setFocusable(true);
         addKeyListener(this.keypressed);
-        requestFocusInWindow();   
+        requestFocusInWindow(); 
+        setBackground(Color.GRAY.brighter());
         
     }
 

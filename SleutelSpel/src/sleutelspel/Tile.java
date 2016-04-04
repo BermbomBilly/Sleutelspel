@@ -10,7 +10,7 @@ public class Tile {
 
     public Tile(){
         
-        this.color = Color.WHITE;
+        this.color = Color.GRAY.brighter();
         this.width = 50;
         this.height = 50;
         this.imageReader = new ImageReader();
