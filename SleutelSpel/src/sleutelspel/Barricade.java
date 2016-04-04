@@ -3,10 +3,22 @@ package sleutelspel;
 import java.awt.*;
 
 public class Barricade extends Tile{    
-
-    public Barricade(){
+    
+    public Barricade(int x){
         
-        super.getImageReader().loadImage("barricade.png");
+        int id = x;
+        
+        switch (id){
+            
+            case 1:
+                super.getImageReader().loadImage("keylock.png");
+                break;
+                
+            case 2:
+                super.getImageReader().loadImage("fire.png");
+                break;
+        }
+            
     }
 
     @Override

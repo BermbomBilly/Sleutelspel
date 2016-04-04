@@ -7,9 +7,11 @@ import javax.swing.JOptionPane;
 public class GameMap {
         
     private Wall wall;
-    private Barricade barricade;
+    private Barricade keylock;
+    private Barricade fire;
     private Tile tile;
     private Key key;
+    private Key bucket;
     private Finish finish;
     private GameManager gameManager;
     private Player player;
@@ -17,9 +19,11 @@ public class GameMap {
     public GameMap(){
         
         this.wall = new Wall();
-        this.barricade = new Barricade();
+        this.keylock = new Barricade(1);
+        this.fire = new Barricade(2);
         this.tile = new Tile();
-        this.key = new Key();
+        this.key = new Key(1);
+        this.bucket = new Key(2);
         this.finish = new Finish();
         this.gameManager = new GameManager();
         this.player = new Player();
@@ -49,6 +53,18 @@ public class GameMap {
                         upMovement = true;
                         break;
                     }
+                    
+                case 6:
+                    if (!this.bucket.isIsPickedUp()){
+                        upMovement = false;
+                        this.gameManager.showMessage("You cannot go here.", "Barricade");
+                        break;
+                    }
+                
+                    else {
+                        upMovement = true; 
+                        break;
+                    }                    
             }
         } 
         
@@ -78,6 +94,18 @@ public class GameMap {
                         downMovement = true;   
                         break;
                     }
+                
+                case 6:
+                    if (!this.bucket.isIsPickedUp()){
+                        downMovement = false;
+                        this.gameManager.showMessage("You cannot go here.", "Barricade");
+                        break;
+                    }
+                
+                    else {
+                        downMovement = true; 
+                        break;
+                    }                
             }
         } 
         
@@ -97,7 +125,7 @@ public class GameMap {
                     break;
                 
                 case 2: 
-                    if (this.key.isIsPickedUp() == false){
+                    if (!this.key.isIsPickedUp()){
                         rightMovement = false;
                         this.gameManager.showMessage("You cannot go here.", "Barricade");
                         break;
@@ -107,6 +135,18 @@ public class GameMap {
                         rightMovement = true;   
                         break;
                     }
+                    
+                case 6:
+                    if (!this.bucket.isIsPickedUp()){
+                        rightMovement = false;
+                        this.gameManager.showMessage("You cannot go here.", "Barricade");
+                        break;
+                    }
+                
+                    else {
+                        rightMovement = true; 
+                        break;
+                    }                    
             }
         }
         
@@ -126,7 +166,19 @@ public class GameMap {
                     break;
                 
                 case 2: 
-                    if (this.key.isIsPickedUp() == false){
+                    if (!this.key.isIsPickedUp()){
+                        leftMovement = false;
+                        this.gameManager.showMessage("You cannot go here.", "Barricade");
+                        break;
+                    }
+                
+                    else {
+                        leftMovement = true; 
+                        break;
+                    }
+                    
+                case 6:
+                    if (!this.bucket.isIsPickedUp()){
                         leftMovement = false;
                         this.gameManager.showMessage("You cannot go here.", "Barricade");
                         break;
@@ -156,6 +208,7 @@ public class GameMap {
                 this.key.setIsPickedUp(true);
                 break;
                 
+
             case 4:
                 if (gameManager.getCurrentMap() != 5){
                         this.gameManager.loadMap(this.gameManager.getCurrentMap());
@@ -166,6 +219,15 @@ public class GameMap {
                     else {
                         this.gameManager.showMessage("You win!", "Congratulations");
                     }
+                
+            case 5:
+                this.gameManager.getTiles()[this.player.getyPos() / 50][this.player.getxPos() / 50] = 0;
+                this.bucket.setIsPickedUp(true);
+                break;
+                
+            case 6:
+                this.gameManager.getTiles()[this.player.getyPos() / 50][this.player.getxPos() / 50] = 0;
+                break;
         }
     }
     
@@ -184,13 +246,20 @@ public class GameMap {
                     case 1: this.wall.paintTile(g, i, j);
                         break;
                     
-                    case 2: this.barricade.paintTile(g, i, j);
+                    case 2: this.keylock.paintTile(g, i, j);
                         break;
                     
                     case 3: this.key.paintTile(g, i, j);
                         break;
                     
                     case 4: this.finish.paintTile(g, i, j);
+                        break;
+                        
+                    case 5: this.bucket.paintTile(g, i, j);
+                        break;
+                        
+                    case 6: this.fire.paintTile(g, i, j);
+                        break;
                 }
             }                        
         }
