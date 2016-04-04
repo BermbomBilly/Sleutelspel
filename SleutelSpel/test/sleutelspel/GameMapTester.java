@@ -8,10 +8,12 @@ public class GameMapTester{
     
     private GameMap map;
     private Wall wall;
-    private Barricade barricade;
+    private Barricade keylock;
+    private Barricade fire;
     private Tile tile;
     private Player player;
     private Key key;
+    private Key bucket;
     private Finish finish;
     private GameManager gameManager;   
     private TextReader textReader;
@@ -26,9 +28,11 @@ public class GameMapTester{
         
         this.map = new GameMap();
         this.wall = new Wall();
-        this.barricade = new Barricade();
+        this.keylock = new Barricade(1);
+        this.fire = new Barricade(2);
         this.tile = new Tile();
-        this.key = new Key();
+        this.key = new Key(1);
+        this.bucket = new Key(2);
         this.finish = new Finish();
         this.gameManager = new GameManager();
         this.player = new Player();

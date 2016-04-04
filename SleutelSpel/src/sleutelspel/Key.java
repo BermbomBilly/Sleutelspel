@@ -6,11 +6,22 @@ public class Key extends Tile{
     
     private boolean isPickedUp;
    
-    public Key(){
+    public Key(int x){
         
         this.isPickedUp = false;
+        int id = x;
         
-        super.getImageReader().loadImage("key.png");
+        switch(id){
+            
+            case 1:
+                super.getImageReader().loadImage("key.png");
+                break;
+                
+            case 2:
+                super.getImageReader().loadImage("bucket.png");
+                break;
+        }
+
     }
     
     @Override
