@@ -1,9 +1,6 @@
 package sleutelspel;
 
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -13,25 +10,17 @@ public class GameMapTester{
     private Wall wall;
     private Barricade barricade;
     private Tile tile;
+    private Player player;
     private Key key;
     private Finish finish;
-    private GameManager gameManager;
-    private Player player;    
+    private GameManager gameManager;   
+    private TextReader textReader;
+    private int tiles[][];
     
     public GameMapTester(){
         
     }
-    
-    @BeforeClass
-    public static void setUpClass(){
-        
-    }
-    
-    @AfterClass
-    public static void tearDownClass(){
-        
-    }
-    
+
     @Before
     public void setUp(){
         
@@ -43,11 +32,8 @@ public class GameMapTester{
         this.finish = new Finish();
         this.gameManager = new GameManager();
         this.player = new Player();
-    }
-    
-    @After
-    public void tearDown(){
-        
+        this.textReader = new TextReader();
+        this.gameManager.loadMap(this.gameManager.getCurrentMap());
     }
     
     //Test to see if the original boolean is set to true when the method is called upon
@@ -70,16 +56,79 @@ public class GameMapTester{
         assertTrue(test);
     }
     
-    
+    //Test to see if the original boolean becomes false whilst engaging a wall
     @Test
     public void CheckUpMovementCase1Test(){        
         
+        map.getPlayer().setyPos(100);
+        int test1 = this.gameManager.getTiles()[map.getPlayer().getyPos() / 50 - 1][map.getPlayer().getxPos() / 50];
+        int expectedTest1 = 1;
         
-        this.player.setyPos(100);
-        this.player.setxPos(0);
-        boolean test = map.checkUpMovement();
-        boolean expectedTest = false;        
+        assertEquals("Array waarde", expectedTest1, test1);
         
-        assertFalse(test);
+        boolean test2 = map.checkUpMovement();         
+        
+        assertFalse(test2);
+    }
+    
+    //Test to see if the original boolean becomes false whilst engaging a barricade without key
+    @Test
+    public void CheckUpMovementCase2IfTest(){
+        
+        map.getPlayer().setyPos(400);
+        map.getPlayer().setxPos(250);
+        int test1 = this.gameManager.getTiles()[map.getPlayer().getyPos() / 50 - 1][map.getPlayer().getxPos() / 50];
+        int expectedTest1 = 2;
+        
+        assertEquals("Array waarde", expectedTest1, test1);
+        
+        boolean test2 = map.checkUpMovement();
+        
+        assertFalse(test2);
+    }
+    
+    //Test to see if the original boolean becomes true whilst engaging a barricade with key
+    @Test
+    public void CheckUpMovementCase2ElseTest(){
+        
+        map.getPlayer().setyPos(400);
+        map.getPlayer().setxPos(250);
+        map.getKey().setIsPickedUp(true);
+        
+        int test1 = this.gameManager.getTiles()[map.getPlayer().getyPos() / 50 - 1][map.getPlayer().getxPos() / 50];
+        int expectedTest1 = 2;
+        
+        assertEquals("Array waarde", expectedTest1, test1);
+        
+        boolean test2 = map.checkUpMovement();
+        
+        assertTrue(test2);
+    }
+    
+    //Kapot
+//    @Test
+//    public void CheckActionTestCase2(){
+//        
+//        map.getPlayer().setyPos(350);
+//        map.getPlayer().setxPos(250);
+//        int test1 = this.gameManager.getTiles()[map.getPlayer().getyPos() / 50][map.getPlayer().getxPos() / 50];
+//        int expectedTest1 = 2;
+//        
+//        assertEquals("Array waarde", expectedTest1, test1);
+//        
+//        map.checkAction();
+//        int test2 = this.gameManager.getTiles()[map.getPlayer().getyPos() / 50][map.getPlayer().getxPos() / 50];
+//        int expectedTest2 = 0;
+//        
+//        assertEquals(expectedTest2, test2);
+//    }
+    
+    @Test
+    public void CurrentMapTest(){
+        
+        int test = this.gameManager.getCurrentMap();
+        int expectedTest = 2;
+        
+        assertEquals(expectedTest, test);
     }
 }

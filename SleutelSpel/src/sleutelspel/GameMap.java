@@ -142,8 +142,7 @@ public class GameMap {
         return leftMovement;
     }
     
-    public void checkAction(){
-        
+    public void checkAction(){        
         
         switch(this.gameManager.getTiles()[this.player.getyPos() / 50][this.player.getxPos() / 50]){
             
@@ -206,5 +205,7 @@ public class GameMap {
         return this.player;
     }
     
-    
+    public Key getKey(){
+        return this.key;
+    }
 }
