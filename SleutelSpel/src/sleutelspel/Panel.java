@@ -1,7 +1,9 @@
-package sleutelspel;
+package SleutelSpel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -9,26 +11,67 @@ public class Panel extends JPanel {
 
     private GameMap map;
     private KeyPressed keypressed;
+    private JButton startButton;
+    private JButton selectLevelButton;
+    private JButton quitButton;
+    private ClickListener listener;
+    private boolean drawGame;
+    private JButton level1;
+    private JButton level2;
+    private JButton level3;
+    private JButton level4;
 
     public Panel(){
         
+        this.drawGame = false;
+        setLayout(null);
+        this.listener = new ClickListener();
+        createButtons();
         this.map = new GameMap();
         this.keypressed = new KeyPressed();                
         setFocusable(true);
         addKeyListener(this.keypressed);
         requestFocusInWindow(); 
         setBackground(Color.GRAY.brighter());
-        
     }
 
+    private void createButtons(){
+
+        this.level1 = new JButton("Level 1");
+        this.level2 = new JButton("Level 2");
+        this.level3 = new JButton("Level 3");
+        this.level4 = new JButton("Level 4");        
+        this.level1.addActionListener(listener);
+        this.level2.addActionListener(listener);
+        this.level3.addActionListener(listener);
+        this.level4.addActionListener(listener);
+        this.level1.setBounds(160, 65, 200, 100);
+        this.level2.setBounds(160, 165, 200, 100);
+        this.level3.setBounds(160, 265, 200, 100);
+        this.level4.setBounds(160, 365, 200, 100);
+                
+        this.startButton = new JButton("Start");
+        this.selectLevelButton = new JButton("Select Level");
+        this.quitButton = new JButton("Quit");
+        this.startButton.addActionListener(listener);
+        this.selectLevelButton.addActionListener(listener);
+        this.quitButton.addActionListener(listener);
+        this.startButton.setBounds(160, 100, 200, 100);
+        this.selectLevelButton.setBounds(160, 200, 200, 100);
+        this.quitButton.setBounds(160, 300, 200, 100);
+        add(startButton);
+        add(selectLevelButton);
+        add(quitButton);
+    }        
+    
     @Override
     public void paintComponent(Graphics g) {
         
         super.paintComponent(g);
                  
-        this.map.drawMap(g);
-
-        
+        if(drawGame){
+            this.map.drawMap(g);
+        }        
     }
 
     public class KeyPressed implements KeyListener {
@@ -73,6 +116,10 @@ public class Panel extends JPanel {
             
             if (key == KeyEvent.VK_ESCAPE){
                 
+                map.getGameManager().setCurrentMap(map.getGameManager().getCurrentMap() - 1);
+                map.getGameManager().loadMap();
+                map.resetAll();
+                repaint();
             }
         }
 
@@ -81,4 +128,72 @@ public class Panel extends JPanel {
 
         }                
     }
+    
+    public class ClickListener implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            
+            if(e.getSource() == startButton){
+                
+                removeAll();
+                drawGame = true;
+                map.getGameManager().setCurrentMap(1);
+                map.getGameManager().loadMap();
+                repaint();
+                
+            }
+            
+            if(e.getSource() == selectLevelButton){
+                
+                removeAll();
+                add(level1);
+                add(level2);
+                add(level3);
+                add(level4);
+                repaint();
+            }
+            
+            if(e.getSource() == quitButton){
+                
+                System.exit(0);
+            }
+            
+            if(e.getSource() == level1){
+                
+                removeAll();
+                drawGame = true;
+                map.getGameManager().setCurrentMap(1);                
+                map.getGameManager().loadMap();
+                repaint();
+            }
+            
+            if(e.getSource() == level2){
+                
+                removeAll();
+                drawGame = true;
+                map.getGameManager().setCurrentMap(2);
+                map.getGameManager().loadMap();
+                repaint();                
+            }
+            
+            if(e.getSource() == level3){
+                
+                removeAll();
+                drawGame = true;
+                map.getGameManager().setCurrentMap(3);
+                map.getGameManager().loadMap();
+                repaint();                
+            }
+            
+            if(e.getSource() == level4){
+                
+                removeAll();
+                drawGame = true;
+                map.getGameManager().setCurrentMap(4);
+                map.getGameManager().loadMap();
+                repaint();                
+            }
+        }                
+    }    
 }

@@ -1,4 +1,4 @@
-package sleutelspel;
+package SleutelSpel;
 
 import java.awt.*;
 

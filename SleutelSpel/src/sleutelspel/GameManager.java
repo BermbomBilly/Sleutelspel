@@ -1,4 +1,4 @@
-package sleutelspel;
+package SleutelSpel;
 
 import javax.swing.JOptionPane;
 
@@ -11,23 +11,21 @@ public class GameManager {
     private int currentMap;
     private TextReader textReader;
     private int [][] tiles;
+
     
     public GameManager(){
-        this.currentMap = 1;
         
+        this.currentMap = 1;              
         this.map1 = "Map1.txt";
         this.map2 = "Map2.txt";
         this.map3 = "Map3.txt";
         this.map4 = "Map4.txt";
        
-        this.textReader = new TextReader();
-        
+        this.textReader = new TextReader();        
     }
-    
-
-    
-    public void loadMap(int currentMap){
-        switch (currentMap){
+        
+    public void loadMap(){
+        switch (this.currentMap){
             case 1: 
                 this.tiles = this.textReader.readFile(this.map1);
                 this.currentMap++;
@@ -52,17 +50,16 @@ public class GameManager {
         JOptionPane.showMessageDialog(null, message, title, JOptionPane.PLAIN_MESSAGE);
         
     }
-    
-
-    
+        
     public int getCurrentMap() {
         return currentMap;
+    }
+    
+    public void setCurrentMap(int x) {
+        this.currentMap = x;
     }
 
     public int[][] getTiles() {
         return tiles;
     }
-    
-    
-    
 }

@@ -1,4 +1,4 @@
-package sleutelspel;
+package SleutelSpel;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;

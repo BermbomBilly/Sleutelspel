@@ -1,8 +1,12 @@
-package sleutelspel;
+package SleutelSpel;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 
 public class GameMap {
         
@@ -17,9 +21,13 @@ public class GameMap {
     private Finish finish;
     private GameManager gameManager;
     private Player player;
+    private TimerListener listener;
+    private Timer timer;
         
     public GameMap(){
         
+        this.listener = new TimerListener();
+        this.timer = new Timer(2000, listener);
         this.wall = new Wall();
         this.keylock = new Barricade(1);
         this.fire = new Barricade(2);
@@ -31,7 +39,8 @@ public class GameMap {
         this.finish = new Finish();
         this.gameManager = new GameManager();
         this.player = new Player();
-        this.gameManager.loadMap(this.gameManager.getCurrentMap());
+        
+        this.gameManager.loadMap();
     }
     
     public boolean checkUpMovement(){
@@ -264,16 +273,19 @@ public class GameMap {
                 
 
             case 4:
-                if (gameManager.getCurrentMap() != 5){
-                        this.gameManager.loadMap(this.gameManager.getCurrentMap());
+                if (gameManager.getCurrentMap() <= 4){
+                        this.gameManager.loadMap();
                         this.player.resetPlayerPosition(0, 0);
                         this.key.setIsPickedUp(false);
                         this.bucket.setIsPickedUp(false);
                         this.saw.setIsPickedUp(false);
+                        break;
                     }
                     
                     else {
-                        this.gameManager.showMessage("You win!", "Congratulations");
+                        this.timer.start();
+                        this.gameManager.showMessage("You win!  Game will end.", "Congratulations");
+                        break;
                     }
                 
             case 5:
@@ -301,12 +313,10 @@ public class GameMap {
     }
     
     public void drawMap(Graphics g){
-        
-        
+                
         for (int i = 0; i < 500; i += 50) {
             for (int j = 0; j < 500; j += 50) {
-                
-                
+                                
                 switch (this.gameManager.getTiles()[j / 50][i / 50]){
                     
                     default: this.tile.paintTile(g, i, j);
@@ -346,7 +356,27 @@ public class GameMap {
         return this.player;
     }
     
+    public void resetAll(){
+        this.player.resetPlayerPosition(0, 0);
+        this.key.setIsPickedUp(false);
+        this.bucket.setIsPickedUp(false);
+        this.saw.setIsPickedUp(false);
+    }
+    
     public Key getKey(){
         return this.key;
+    }
+    
+    public GameManager getGameManager(){
+        return this.gameManager;
+    }
+    
+    public class TimerListener implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+                           
+            System.exit(0);            
+        }                
     }
 }
