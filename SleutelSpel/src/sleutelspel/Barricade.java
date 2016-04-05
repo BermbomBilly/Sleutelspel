@@ -17,6 +17,10 @@ public class Barricade extends Tile{
             case 2:
                 super.getImageReader().loadImage("fire.png");
                 break;
+                
+            case 3:
+                super.getImageReader().loadImage("tree.png");
+                break;
         }
             
     }

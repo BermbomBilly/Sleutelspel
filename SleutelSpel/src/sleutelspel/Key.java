@@ -20,6 +20,10 @@ public class Key extends Tile{
             case 2:
                 super.getImageReader().loadImage("bucket.png");
                 break;
+                
+            case 3:
+                super.getImageReader().loadImage("saw.png");
+                break;
         }
 
     }

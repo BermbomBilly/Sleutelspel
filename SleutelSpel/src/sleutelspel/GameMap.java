@@ -9,9 +9,11 @@ public class GameMap {
     private Wall wall;
     private Barricade keylock;
     private Barricade fire;
+    private Barricade tree;
     private Tile tile;
     private Key key;
     private Key bucket;
+    private Key saw;
     private Finish finish;
     private GameManager gameManager;
     private Player player;
@@ -21,9 +23,11 @@ public class GameMap {
         this.wall = new Wall();
         this.keylock = new Barricade(1);
         this.fire = new Barricade(2);
+        this.tree = new Barricade(3);
         this.tile = new Tile();
         this.key = new Key(1);
         this.bucket = new Key(2);
+        this.saw = new Key(3);
         this.finish = new Finish();
         this.gameManager = new GameManager();
         this.player = new Player();
@@ -64,6 +68,18 @@ public class GameMap {
                     else {
                         upMovement = true; 
                         break;
+                    }
+
+                case 8:
+                    if (!this.saw.isIsPickedUp()){
+                        upMovement = false;
+                        this.gameManager.showMessage("You cannot go here.", "Barricade");
+                        break;
+                    }
+                
+                    else {
+                        upMovement = true; 
+                        break;
                     }                    
             }
         } 
@@ -90,7 +106,7 @@ public class GameMap {
                         break;
                     }
                 
-                    else if (this.key.isIsPickedUp()){
+                    else {
                         downMovement = true;   
                         break;
                     }
@@ -105,7 +121,19 @@ public class GameMap {
                     else {
                         downMovement = true; 
                         break;
-                    }                
+                    }
+                    
+                case 8:
+                    if (!this.saw.isIsPickedUp()){
+                        downMovement = false;
+                        this.gameManager.showMessage("You cannot go here.", "Barricade");
+                        break;
+                    }
+                
+                    else {
+                        downMovement = true;   
+                        break;
+                    }                    
             }
         } 
         
@@ -138,6 +166,18 @@ public class GameMap {
                     
                 case 6:
                     if (!this.bucket.isIsPickedUp()){
+                        rightMovement = false;
+                        this.gameManager.showMessage("You cannot go here.", "Barricade");
+                        break;
+                    }
+                
+                    else {
+                        rightMovement = true; 
+                        break;
+                    }
+
+                case 8:
+                    if (!this.saw.isIsPickedUp()){
                         rightMovement = false;
                         this.gameManager.showMessage("You cannot go here.", "Barricade");
                         break;
@@ -188,6 +228,18 @@ public class GameMap {
                         leftMovement = true; 
                         break;
                     }
+                    
+                case 8:
+                    if (!this.saw.isIsPickedUp()){
+                        leftMovement = false;
+                        this.gameManager.showMessage("You cannot go here.", "Barricade");
+                        break;
+                    }
+                
+                    else {
+                        leftMovement = true; 
+                        break;
+                    }                    
             }
         }
         
@@ -206,6 +258,8 @@ public class GameMap {
             case 3:
                 this.gameManager.getTiles()[this.player.getyPos() / 50][this.player.getxPos() / 50] = 0;
                 this.key.setIsPickedUp(true);
+                this.bucket.setIsPickedUp(false);
+                this.saw.setIsPickedUp(false);
                 break;
                 
 
@@ -213,7 +267,9 @@ public class GameMap {
                 if (gameManager.getCurrentMap() != 5){
                         this.gameManager.loadMap(this.gameManager.getCurrentMap());
                         this.player.resetPlayerPosition(0, 0);
-                        this.key.setIsPickedUp(false);                           
+                        this.key.setIsPickedUp(false);
+                        this.bucket.setIsPickedUp(false);
+                        this.saw.setIsPickedUp(false);
                     }
                     
                     else {
@@ -223,11 +279,24 @@ public class GameMap {
             case 5:
                 this.gameManager.getTiles()[this.player.getyPos() / 50][this.player.getxPos() / 50] = 0;
                 this.bucket.setIsPickedUp(true);
+                this.key.setIsPickedUp(false);
+                this.saw.setIsPickedUp(false);
                 break;
                 
             case 6:
                 this.gameManager.getTiles()[this.player.getyPos() / 50][this.player.getxPos() / 50] = 0;
                 break;
+                
+            case 7:
+                this.gameManager.getTiles()[this.player.getyPos() / 50][this.player.getxPos() / 50] = 0;
+                this.saw.setIsPickedUp(true);
+                this.key.setIsPickedUp(false);
+                this.bucket.setIsPickedUp(false);
+                break;
+                
+            case 8:
+                this.gameManager.getTiles()[this.player.getyPos() / 50][this.player.getxPos() / 50] = 0;
+                break; 
         }
     }
     
@@ -259,6 +328,12 @@ public class GameMap {
                         break;
                         
                     case 6: this.fire.paintTile(g, i, j);
+                        break;
+                        
+                    case 7: this.saw.paintTile(g, i, j);
+                        break;
+                        
+                    case 8: this.tree.paintTile(g, i, j);
                         break;
                 }
             }                        
