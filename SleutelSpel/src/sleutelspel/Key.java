@@ -1,5 +1,7 @@
 package SleutelSpel;
 
+
+
 import java.awt.Graphics;
 
 public class Key extends Tile{

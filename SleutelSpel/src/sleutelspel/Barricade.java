@@ -1,5 +1,7 @@
 package SleutelSpel;
 
+
+
 import java.awt.*;
 
 public class Barricade extends Tile{    
