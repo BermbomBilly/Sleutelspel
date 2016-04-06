@@ -3,12 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Martijn/Documents/GitHub/Sleutelspel/SleutelSpel/src/sleutelspel/Panel.java</file>
-            <file>file:/C:/Users/Martijn/Documents/GitHub/Sleutelspel/SleutelSpel/src/sleutelspel/GameMap.java</file>
-            <file>file:/C:/Users/Martijn/Documents/GitHub/Sleutelspel/SleutelSpel/src/sleutelspel/Map1.txt</file>
-            <file>file:/C:/Users/Martijn/Documents/GitHub/Sleutelspel/SleutelSpel/src/sleutelspel/Main.java</file>
-            <file>file:/C:/Users/Martijn/Documents/GitHub/Sleutelspel/SleutelSpel/src/sleutelspel/Key.java</file>
-            <file>file:/C:/Users/Martijn/Documents/GitHub/Sleutelspel/SleutelSpel/src/sleutelspel/Barricade.java</file>
+            <file>file:/C:/Users/timo/Documents/GitHub/Sleutelspel/SleutelSpel/src/SleutelSpel/GameMap.java</file>
+            <file>file:/C:/Users/timo/Documents/GitHub/Sleutelspel/SleutelSpel/src/SleutelSpel/Panel.java</file>
+            <file>file:/C:/Users/timo/Documents/GitHub/Sleutelspel/SleutelSpel/src/SleutelSpel/GameManager.java</file>
+            <file>file:/C:/Users/timo/Documents/GitHub/Sleutelspel/SleutelSpel/src/SleutelSpel/Frame.java</file>
+            <file>file:/C:/Users/timo/Documents/GitHub/Sleutelspel/SleutelSpel/test/sleutelspel/GameMapTester.java</file>
+            <file>file:/C:/Users/timo/Documents/GitHub/Sleutelspel/SleutelSpel/test/sleutelspel/PlayerTester.java</file>
+            <file>file:/C:/Users/timo/Documents/GitHub/Sleutelspel/SleutelSpel/src/SleutelSpel/Player.java</file>
+            <file>file:/C:/Users/timo/Documents/GitHub/Sleutelspel/SleutelSpel/src/SleutelSpel/Key.java</file>
+            <file>file:/C:/Users/timo/Documents/GitHub/Sleutelspel/SleutelSpel/src/SleutelSpel/TextReader.java</file>
+            <file>file:/C:/Users/timo/Documents/GitHub/Sleutelspel/SleutelSpel/src/SleutelSpel/Main.java</file>
+            <file>file:/C:/Users/timo/Documents/GitHub/Sleutelspel/SleutelSpel/src/SleutelSpel/Barricade.java</file>
         </group>
     </open-files>
 </project-private>
