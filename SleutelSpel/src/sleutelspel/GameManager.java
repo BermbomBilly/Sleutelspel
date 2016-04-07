@@ -14,7 +14,9 @@ public class GameManager {
     private TextReader textReader;
     private int [][] tiles;
 
-    
+    /**
+     * Constructor that sets an int for the current map so that the right map will be loaded
+     */
     public GameManager(){
         
         this.currentMap = 1;              
@@ -26,6 +28,9 @@ public class GameManager {
         this.textReader = new TextReader();        
     }
         
+    /**
+     * Method that loads the right map by using a switchcase
+     */
     public void loadMap(){
         switch (this.currentMap){
             case 1: 
@@ -47,6 +52,11 @@ public class GameManager {
         }
     }
     
+    /**
+     * Method for showing a message used in the game
+     * @param message message you want to show
+     * @param title title you want the message to have
+     */
     public void showMessage(String message, String title){
         
         JOptionPane.showMessageDialog(null, message, title, JOptionPane.PLAIN_MESSAGE);

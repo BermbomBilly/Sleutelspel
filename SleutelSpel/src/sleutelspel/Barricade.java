@@ -6,6 +6,10 @@ import java.awt.*;
 
 public class Barricade extends Tile{    
     
+    /**
+     * Constructor with a switchcase that determines the image to load
+     * @param x id
+     */
     public Barricade(int x){
         
         int id = x;
@@ -26,7 +30,13 @@ public class Barricade extends Tile{
         }
             
     }
-
+    
+    /**
+     * Paints an instance of 'Barricade'
+     * @param g graphics
+     * @param x x-position in map
+     * @param y y-postition in map
+     */
     @Override
     public void paintTile(Graphics g, int x, int y){
 

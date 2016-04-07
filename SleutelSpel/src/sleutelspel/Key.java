@@ -8,6 +8,10 @@ public class Key extends Tile{
     
     private boolean isPickedUp;
    
+    /**
+     * Constructor with a switchcase that determines the image to load
+     * @param x id
+     */
     public Key(int x){
         
         this.isPickedUp = false;
@@ -30,6 +34,12 @@ public class Key extends Tile{
 
     }
     
+    /**
+     * Paints an instance of 'Key'
+     * @param g graphics
+     * @param x x-position in map
+     * @param y y-position in map
+     */
     @Override
     public void paintTile(Graphics g, int x, int y){
         

@@ -10,6 +10,10 @@ public class ImageReader {
 
     private BufferedImage image;
     
+    /**
+     * Method that loads an image
+     * @param image image you want to load
+     */
     public void loadImage(String image){
         
          try {

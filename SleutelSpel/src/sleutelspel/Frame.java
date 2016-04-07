@@ -2,8 +2,6 @@ package SleutelSpel;
 
 
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.*;
 
 public class Frame extends JFrame {
@@ -11,7 +9,10 @@ public class Frame extends JFrame {
     private final int WIDTH = 507;
     private final int HEIGHT = 536;
     private Panel panel;
-
+    
+    /**
+     * Constructor that creates the frame in which the game will run
+     */
     public Frame(){
         
         this.panel = new Panel();

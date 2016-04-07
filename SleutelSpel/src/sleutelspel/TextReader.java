@@ -16,11 +16,19 @@ public class TextReader {
     private URL url;
     private int tiles[][];       
     
+    /**
+     * Constructor that creates an array to be filled
+     */
     public TextReader(){
         
         this.tiles = new int[10][10];        
     }
  
+    /**
+     * Method that reads a textfile and fills the created array with the integers in the textfile
+     * @param map level to be loaded
+     * @return the filled array
+     */
     public int[][] readFile(String map){
         
         this.url = getClass().getResource(map);
@@ -45,5 +53,4 @@ public class TextReader {
         
         return this.tiles;
     }
-
 }

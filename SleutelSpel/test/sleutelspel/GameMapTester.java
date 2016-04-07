@@ -1,4 +1,6 @@
-package sleutelspel;
+package SleutelSpel;
+
+
 
 import org.junit.Before;
 import org.junit.Test;
@@ -17,12 +19,12 @@ public class GameMapTester{
     private Finish finish;
     private GameManager gameManager;   
     private TextReader textReader;
-    private int tiles[][];
     
     public GameMapTester(){
         
     }
-
+    
+    // Creates the environment of the test
     @Before
     public void setUp(){
         
@@ -37,7 +39,7 @@ public class GameMapTester{
         this.gameManager = new GameManager();
         this.player = new Player();
         this.textReader = new TextReader();
-        this.gameManager.loadMap(this.gameManager.getCurrentMap());
+        this.gameManager.loadMap();
     }
     
     //Test to see if the original boolean is set to true when the method is called upon
@@ -64,6 +66,7 @@ public class GameMapTester{
     @Test
     public void CheckUpMovementCase1Test(){        
         
+       
         map.getPlayer().setyPos(100);
         int test1 = this.gameManager.getTiles()[map.getPlayer().getyPos() / 50 - 1][map.getPlayer().getxPos() / 50];
         int expectedTest1 = 1;
@@ -79,16 +82,17 @@ public class GameMapTester{
     @Test
     public void CheckUpMovementCase2IfTest(){
         
-        map.getPlayer().setyPos(400);
-        map.getPlayer().setxPos(250);
+        map.getPlayer().setyPos(150);
+        map.getPlayer().setxPos(350);
         int test1 = this.gameManager.getTiles()[map.getPlayer().getyPos() / 50 - 1][map.getPlayer().getxPos() / 50];
         int expectedTest1 = 2;
         
         assertEquals("Array waarde", expectedTest1, test1);
         
         boolean test2 = map.checkUpMovement();
+        boolean expectedTest2 = false;
         
-        assertFalse(test2);
+        assertEquals(expectedTest2, test2);
     }
     
     //Test to see if the original boolean becomes true whilst engaging a barricade with key
@@ -108,24 +112,6 @@ public class GameMapTester{
         
         assertTrue(test2);
     }
-    
-    //Kapot
-//    @Test
-//    public void CheckActionTestCase2(){
-//        
-//        map.getPlayer().setyPos(350);
-//        map.getPlayer().setxPos(250);
-//        int test1 = this.gameManager.getTiles()[map.getPlayer().getyPos() / 50][map.getPlayer().getxPos() / 50];
-//        int expectedTest1 = 2;
-//        
-//        assertEquals("Array waarde", expectedTest1, test1);
-//        
-//        map.checkAction();
-//        int test2 = this.gameManager.getTiles()[map.getPlayer().getyPos() / 50][map.getPlayer().getxPos() / 50];
-//        int expectedTest2 = 0;
-//        
-//        assertEquals(expectedTest2, test2);
-//    }
     
     @Test
     public void CurrentMapTest(){

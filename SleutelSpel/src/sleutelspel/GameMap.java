@@ -2,12 +2,10 @@ package SleutelSpel;
 
 
 
-import java.awt.Color;
+
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JButton;
-import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
 public class GameMap {
@@ -26,6 +24,9 @@ public class GameMap {
     private TimerListener listener;
     private Timer timer;
         
+    /**
+     * Constructor that creates all objects used in the game map
+     */
     public GameMap(){
         
         this.listener = new TimerListener();
@@ -41,10 +42,13 @@ public class GameMap {
         this.finish = new Finish();
         this.gameManager = new GameManager();
         this.player = new Player();
-        
         this.gameManager.loadMap();
     }
     
+    /**
+     * Method that checks the position of the player and determines if the player is allowed to move up
+     * @return boolean if the movement is allowed
+     */
     public boolean checkUpMovement(){
         
         boolean upMovement = true;
@@ -98,11 +102,15 @@ public class GameMap {
         return upMovement;
     }
     
+    /**
+     * Method that checks the position of the player and determines if the player is allowed to move down
+     * @return boolean if the movement is allowed
+     */
     public boolean checkDownMovement(){
         
         boolean downMovement = true;
         
-        if (player.getyPos() / 50 != 9){
+        if (this.player.getyPos() / 50 != 9){
             
             switch (this.gameManager.getTiles()[this.player.getyPos() / 50 + 1][this.player.getxPos() / 50]){
                 
@@ -151,6 +159,10 @@ public class GameMap {
         return downMovement;
     }
     
+    /**
+     * Method that checks the position of the player and determines if the player is allowed to move right
+     * @return boolean if the movement is allowed 
+     */
     public boolean checkRightMovement(){
        
         boolean rightMovement = true;
@@ -204,6 +216,10 @@ public class GameMap {
         return rightMovement;
     }
     
+    /**
+     * Method that checks the position of the player and determines if the player is allowed to move left
+     * @return boolean if the movement is allowed
+     */
     public boolean checkLeftMovement(){
         
         boolean leftMovement = true;
@@ -257,9 +273,11 @@ public class GameMap {
         return leftMovement;
     }
     
+    /**
+     * Checks the position of the player and determines the action to happen using a switchcase
+     */
     public void checkAction(){
-        
-        
+                
         switch(this.gameManager.getTiles()[this.player.getyPos() / 50][this.player.getxPos() / 50]){
             
             case 2:
@@ -273,22 +291,21 @@ public class GameMap {
                 this.saw.setIsPickedUp(false);
                 break;
                 
-
             case 4:
                 if (gameManager.getCurrentMap() <= 4){
-                        this.gameManager.loadMap();
-                        this.player.resetPlayerPosition(0, 0);
-                        this.key.setIsPickedUp(false);
-                        this.bucket.setIsPickedUp(false);
-                        this.saw.setIsPickedUp(false);
-                        break;
-                    }
+                    this.gameManager.loadMap();
+                    this.player.resetPlayerPosition(0, 0);
+                    this.key.setIsPickedUp(false);
+                    this.bucket.setIsPickedUp(false);
+                    this.saw.setIsPickedUp(false);
+                    break;
+                }
                     
-                    else {
-                        this.timer.start();
-                        this.gameManager.showMessage("You win!  Game will end.", "Congratulations");
-                        break;
-                    }
+                else {
+                    this.timer.start();
+                    this.gameManager.showMessage("You win!  Game will end.", "Congratulations");
+                    break;
+                }
                 
             case 5:
                 this.gameManager.getTiles()[this.player.getyPos() / 50][this.player.getxPos() / 50] = 0;
@@ -314,6 +331,10 @@ public class GameMap {
         }
     }
     
+    /**
+     * Iterates through the array and determines which object to draw using a switchcase
+     * @param g graphics
+     */
     public void drawMap(Graphics g){
                 
         for (int i = 0; i < 500; i += 50) {
@@ -358,6 +379,9 @@ public class GameMap {
         return this.player;
     }
     
+    /**
+     * Method that resets the player position and makes sure the player loses all keys
+     */
     public void resetAll(){
         this.player.resetPlayerPosition(0, 0);
         this.key.setIsPickedUp(false);
@@ -372,7 +396,10 @@ public class GameMap {
     public GameManager getGameManager(){
         return this.gameManager;
     }
-    
+
+    /**
+     * Action listener for the timer that makes sure the program quits once the game has been won
+     */
     public class TimerListener implements ActionListener{
 
         @Override

@@ -1,4 +1,6 @@
-package sleutelspel;
+package SleutelSpel;
+
+
 
 import org.junit.Before;
 import org.junit.Test;
@@ -13,6 +15,7 @@ public class PlayerTester {
         
     }
     
+    //Creates the environment of the test
     @Before
     public void setUp() {
         
@@ -21,10 +24,6 @@ public class PlayerTester {
         this.yPos = 0;
         this.width = 50;
         this.height = 50;
-        int MAX_Y = 450;
-        int MAX_X = 450;
-        int MIN_Y = 0;
-        int MIN_X = 0;   
     }
     
     @Test
