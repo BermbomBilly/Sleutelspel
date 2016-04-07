@@ -1,35 +1,49 @@
-package sleutelspel;
+package SleutelSpel;
+
+
 
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import javax.imageio.ImageIO;
 
 public class Key extends Tile{
     
-    private BufferedImage key;
     private boolean isPickedUp;
-
-    
-    public Key(){
+   
+    /**
+     * Constructor with a switchcase that determines the image to load
+     * @param x id
+     */
+    public Key(int x){
         
         this.isPickedUp = false;
+        int id = x;
         
-        try {
+        switch(id){
             
-            this.key = ImageIO.read(getClass().getResourceAsStream("key.png"));
-        } 
-        
-        catch (IOException ex) {
-
-            ex.printStackTrace();
+            case 1:
+                super.getImageReader().loadImage("key.png");
+                break;
+                
+            case 2:
+                super.getImageReader().loadImage("bucket.png");
+                break;
+                
+            case 3:
+                super.getImageReader().loadImage("saw.png");
+                break;
         }
+
     }
     
+    /**
+     * Paints an instance of 'Key'
+     * @param g graphics
+     * @param x x-position in map
+     * @param y y-position in map
+     */
     @Override
     public void paintTile(Graphics g, int x, int y){
         
-        g.drawImage(this.key, x, y, super.getWidth(), super.getHeight(), null);
+        g.drawImage(super.getImageReader().getImage(), x, y, super.getWidth(), super.getHeight(), null);
     }
 
     public boolean isIsPickedUp() {

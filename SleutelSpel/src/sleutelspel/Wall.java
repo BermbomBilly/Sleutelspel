@@ -1,30 +1,28 @@
-package sleutelspel;
+package SleutelSpel;
+
+
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import javax.imageio.ImageIO;
 
 public class Wall extends Tile{
     
-    private BufferedImage wall;
-    
+    /**
+     * Constructor that loads an image
+     */
     public Wall(){
         
-        try {
-            
-            this.wall = ImageIO.read(getClass().getResourceAsStream("wall.png"));
-        } 
-        
-        catch (IOException ex) {
-            
-            ex.printStackTrace();
-        }
+        super.getImageReader().loadImage("wall.png");
     }
 
+    /**
+     * Paints an instance of 'Wall'
+     * @param g graphics
+     * @param x x-position in map
+     * @param y y-position i nmap
+     */
     @Override
     public void paintTile(Graphics g, int x, int y){
 
-        g.drawImage(this.wall, x, y, super.getWidth(), super.getHeight(), null);
+        g.drawImage(super.getImageReader().getImage(), x, y, super.getWidth(), super.getHeight(), null);
     }
 }

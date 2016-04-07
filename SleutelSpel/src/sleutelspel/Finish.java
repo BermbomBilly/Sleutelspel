@@ -1,31 +1,28 @@
-package sleutelspel;
+package SleutelSpel;
+
+
 
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import javax.imageio.ImageIO;
 
 public class Finish extends Tile{
     
-    private BufferedImage finish;
-    
+    /**
+     * Constructor that loads the image
+     */
     public Finish(){
                
-        try {
-            
-            this.finish = ImageIO.read(getClass().getResourceAsStream("finish.png"));
-        } 
-        
-        catch (IOException ex) {
-
-            ex.printStackTrace();
-        }
-        
+        super.getImageReader().loadImage("finish.png");
     }
     
+    /**
+     * Paints an instance of 'Finish'
+     * @param g graphics
+     * @param x x-position in map
+     * @param y y-position in map
+     */
     @Override
     public void paintTile(Graphics g, int x, int y){
         
-        g.drawImage(this.finish, x, y, super.getWidth(), super.getHeight(), null);
+        g.drawImage(super.getImageReader().getImage(), x, y, super.getWidth(), super.getHeight(), null);
     }
 }

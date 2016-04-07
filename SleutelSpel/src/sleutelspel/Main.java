@@ -1,4 +1,6 @@
-package sleutelspel;
+package SleutelSpel;
+
+
 
 import javax.swing.SwingUtilities;
 
@@ -11,7 +13,7 @@ public class Main  {
             @Override
             public void run(){
                 
-                Frame frame = new Frame();
+                new Frame();
             }                
         });                  
     }

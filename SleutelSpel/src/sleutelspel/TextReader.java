@@ -1,4 +1,6 @@
-package sleutelspel;
+package SleutelSpel;
+
+
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -14,19 +16,27 @@ public class TextReader {
     private URL url;
     private int tiles[][];       
     
+    /**
+     * Constructor that creates an array to be filled
+     */
     public TextReader(){
         
         this.tiles = new int[10][10];        
     }
  
-    public int[][] loadMap(String map){
+    /**
+     * Method that reads a textfile and fills the created array with the integers in the textfile
+     * @param map level to be loaded
+     * @return the filled array
+     */
+    public int[][] readFile(String map){
         
         this.url = getClass().getResource(map);
-        this.file = new File(url.getPath());
+        this.file = new File(this.url.getPath());
         
         try {
             
-            this.scanner = new Scanner(file);
+            this.scanner = new Scanner(this.file);
         } 
         
         catch (FileNotFoundException ex) {
@@ -34,13 +44,13 @@ public class TextReader {
             Logger.getLogger(TextReader.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        for (int i = 0; i < tiles.length; i++) {
-            for (int j = 0; j < tiles.length; j++) {
+        for (int i = 0; i < this.tiles.length; i++) {
+            for (int j = 0; j < this.tiles.length; j++) {
                 
-                this.tiles[i][j] = scanner.nextInt();               
+                this.tiles[i][j] = this.scanner.nextInt();               
             }            
         }
         
-        return tiles;
+        return this.tiles;
     }
 }
